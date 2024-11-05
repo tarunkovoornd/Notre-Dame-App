@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'grades_page.dart';
+import 'schedule_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -50,6 +51,11 @@ class HomePage extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const GradesPage()),
+            );
+          } else if (label == 'Schedule') {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SchedulePage()),
             );
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
