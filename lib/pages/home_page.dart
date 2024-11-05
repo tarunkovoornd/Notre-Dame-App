@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'grades_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -45,10 +46,16 @@ class HomePage extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton.icon(
         onPressed: () {
-          // TODO: Implement navigation to respective pages
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('$label page not implemented yet')),
-          );
+          if (label == 'Grades') {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const GradesPage()),
+            );
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('$label page not implemented yet')),
+            );
+          }
         },
         icon: Icon(icon),
         label: Text(label),
