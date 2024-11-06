@@ -23,3 +23,5 @@ flutter:
 
   assets:
     - assets/mock_users.json
+    - assets/mock_grades.json
+    - assets/mock_schedule.json

@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 class GradesPage extends StatefulWidget {
   const GradesPage({Key? key}) : super(key: key);
@@ -8,41 +10,21 @@ class GradesPage extends StatefulWidget {
 }
 
 class _GradesPageState extends State<GradesPage> {
+  late Future<Map<String, dynamic>> _gradesFuture;
   String _selectedTerm = 'Fall Semester';
   bool _showGrades = false;
   String _selectedPeriod = '1st marking period';
 
-  // Mock data for courses and grades
-  final Map<String, Map<String, List<Course>>> _courseData = {
-    'Fall Semester': {
-      '1st marking period': [
-        Course('English Literature', 92),
-        Course('Algebra II', 88),
-        Course('Biology', 95),
-        Course('World History', 91),
-      ],
-      '2nd marking period': [
-        Course('English Literature', 94),
-        Course('Algebra II', 90),
-        Course('Biology', 93),
-        Course('World History', 89),
-      ],
-    },
-    'Spring Semester': {
-      '1st marking period': [
-        Course('American Literature', 90),
-        Course('Pre-Calculus', 87),
-        Course('Chemistry', 92),
-        Course('Economics', 94),
-      ],
-      '2nd marking period': [
-        Course('American Literature', 93),
-        Course('Pre-Calculus', 89),
-        Course('Chemistry', 91),
-        Course('Economics', 96),
-      ],
-    },
-  };
+  @override
+  void initState() {
+    super.initState();
+    _gradesFuture = _loadGradesData();
+  }
+
+  Future<Map<String, dynamic>> _loadGradesData() async {
+    String jsonString = await rootBundle.loadString('assets/mock_grades.json');
+    return json.decode(jsonString);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,135 +32,158 @@ class _GradesPageState extends State<GradesPage> {
       appBar: AppBar(
         title: const Text('Grades'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Courses',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 16),
-            Row(
-              children: [
-                const Text('Term:', style: TextStyle(fontSize: 18)),
-                const SizedBox(width: 8),
-                ElevatedButton(
-                  onPressed: () => setState(() => _selectedTerm = 'Fall Semester'),
-                  child: const Text('Fall Semester'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: _selectedTerm == 'Fall Semester' ? Colors.blue : Colors.grey,
-                  ),
-                ),
-                const SizedBox(width: 8),
-                ElevatedButton(
-                  onPressed: () => setState(() => _selectedTerm = 'Spring Semester'),
-                  child: const Text('Spring Semester'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: _selectedTerm == 'Spring Semester' ? Colors.blue : Colors.grey,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            Row(
-              children: [
-                const Text('Grades:', style: TextStyle(fontSize: 18)),
-                const SizedBox(width: 8),
-                ElevatedButton(
-                  onPressed: () => setState(() => _showGrades = true),
-                  child: const Text('Show'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: _showGrades ? Colors.blue : Colors.grey,
-                  ),
-                ),
-                const SizedBox(width: 8),
-                ElevatedButton(
-                  onPressed: () => setState(() => _showGrades = false),
-                  child: const Text('Hide'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: !_showGrades ? Colors.blue : Colors.grey,
-                  ),
-                ),
-              ],
-            ),
-            if (_showGrades) ...[
-              const SizedBox(height: 16),
-              Row(
-                children: [
-                  ElevatedButton(
-                    onPressed: () => setState(() => _selectedPeriod = '1st marking period'),
-                    child: const Text('1st marking period'),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: _selectedPeriod == '1st marking period' ? Colors.blue : Colors.grey,
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  ElevatedButton(
-                    onPressed: () => setState(() => _selectedPeriod = '2nd marking period'),
-                    child: const Text('2nd marking period'),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: _selectedPeriod == '2nd marking period' ? Colors.blue : Colors.grey,
-                    ),
-                  ),
-                ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Courses',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 16),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: _courseData[_selectedTerm]![_selectedPeriod]!.length,
-                  itemBuilder: (context, index) {
-                    final course = _courseData[_selectedTerm]![_selectedPeriod]![index];
-                    return Card(
-                      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                      child: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    course.name,
-                                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                                  ),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    'Grade: ${course.grade}',
-                                    style: const TextStyle(fontSize: 14),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            ElevatedButton(
-                              onPressed: () {
-                                // TODO: Implement grade details view
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Grade details not implemented yet')),
-                                );
-                              },
-                              child: const Text('See grade details'),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
+              _buildTermButtons(),
+              const SizedBox(height: 16),
+              _buildGradeVisibilityButtons(),
+              if (_showGrades) ...[
+                const SizedBox(height: 16),
+                _buildMarkingPeriodButtons(),
+                const SizedBox(height: 16),
+                _buildGradesList(),
+              ],
             ],
-          ],
+          ),
         ),
       ),
     );
   }
-}
 
-class Course {
-  final String name;
-  final int grade;
+  Widget _buildTermButtons() {
+    return Row(
+      children: [
+        const Text('Term:', style: TextStyle(fontSize: 18)),
+        const SizedBox(width: 8),
+        _buildTermButton('Fall Semester'),
+        const SizedBox(width: 8),
+        _buildTermButton('Spring Semester'),
+      ],
+    );
+  }
 
-  Course(this.name, this.grade);
+  Widget _buildTermButton(String term) {
+    return ElevatedButton(
+      onPressed: () => setState(() => _selectedTerm = term),
+      child: Text(term),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: _selectedTerm == term ? Colors.blue : Colors.grey,
+      ),
+    );
+  }
+
+  Widget _buildGradeVisibilityButtons() {
+    return Row(
+      children: [
+        const Text('Grades:', style: TextStyle(fontSize: 18)),
+        const SizedBox(width: 8),
+        _buildVisibilityButton('Show', true),
+        const SizedBox(width: 8),
+        _buildVisibilityButton('Hide', false),
+      ],
+    );
+  }
+
+  Widget _buildVisibilityButton(String label, bool visibility) {
+    return ElevatedButton(
+      onPressed: () => setState(() => _showGrades = visibility),
+      child: Text(label),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: _showGrades == visibility ? Colors.blue : Colors.grey,
+      ),
+    );
+  }
+
+  Widget _buildMarkingPeriodButtons() {
+    return Row(
+      children: [
+        _buildMarkingPeriodButton('1st marking period'),
+        const SizedBox(width: 8),
+        _buildMarkingPeriodButton('2nd marking period'),
+      ],
+    );
+  }
+
+  Widget _buildMarkingPeriodButton(String period) {
+    return ElevatedButton(
+      onPressed: () => setState(() => _selectedPeriod = period),
+      child: Text(period),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: _selectedPeriod == period ? Colors.blue : Colors.grey,
+      ),
+    );
+  }
+
+  Widget _buildGradesList() {
+    return FutureBuilder<Map<String, dynamic>>(
+      future: _gradesFuture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Center(child: Text('Error: ${snapshot.error}'));
+        } else if (!snapshot.hasData) {
+          return const Center(child: Text('No grades data available'));
+        } else {
+          final grades = snapshot.data![_selectedTerm][_selectedPeriod] as List<dynamic>;
+          return ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: grades.length,
+            itemBuilder: (context, index) {
+              final course = grades[index];
+              return Card(
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          course['name'],
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            '${course['grade']}',
+                            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(height: 4),
+                          ElevatedButton(
+                            onPressed: () {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('Grade details not implemented yet')),
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              textStyle: const TextStyle(fontSize: 12),
+                            ),
+                            child: const Text('See grade details'),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+        }
+      },
+    );
+  }
 }

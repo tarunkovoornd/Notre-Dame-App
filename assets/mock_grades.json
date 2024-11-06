@@ -1,0 +1,30 @@
+{
+    "Fall Semester": {
+      "1st marking period": [
+        {"name": "English Literature", "grade": 92},
+        {"name": "Algebra II", "grade": 88},
+        {"name": "Biology", "grade": 95},
+        {"name": "World History", "grade": 91}
+      ],
+      "2nd marking period": [
+        {"name": "English Literature", "grade": 94},
+        {"name": "Algebra II", "grade": 90},
+        {"name": "Biology", "grade": 93},
+        {"name": "World History", "grade": 89}
+      ]
+    },
+    "Spring Semester": {
+      "1st marking period": [
+        {"name": "American Literature", "grade": 90},
+        {"name": "Pre-Calculus", "grade": 87},
+        {"name": "Chemistry", "grade": 92},
+        {"name": "Economics", "grade": 94}
+      ],
+      "2nd marking period": [
+        {"name": "American Literature", "grade": 93},
+        {"name": "Pre-Calculus", "grade": 89},
+        {"name": "Chemistry", "grade": 91},
+        {"name": "Economics", "grade": 96}
+      ]
+    }
+  }
