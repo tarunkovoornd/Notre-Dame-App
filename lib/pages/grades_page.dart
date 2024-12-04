@@ -163,16 +163,12 @@ class _GradesPageState extends State<GradesPage> {
                           ),
                           const SizedBox(height: 4),
                           ElevatedButton(
-                            onPressed: () {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Grade details not implemented yet')),
-                              );
-                            },
+                            onPressed: () => _showAssignments(context, course),
                             style: ElevatedButton.styleFrom(
                               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                               textStyle: const TextStyle(fontSize: 12),
                             ),
-                            child: const Text('See grade details'),
+                            child: const Text('See details'),
                           ),
                         ],
                       ),
@@ -183,6 +179,37 @@ class _GradesPageState extends State<GradesPage> {
             },
           );
         }
+      },
+    );
+  }
+
+  void _showAssignments(BuildContext context, Map<String, dynamic> course) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('${course['name']} Assignments'),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: (course['assignments'] as List<dynamic>).map((assignment) {
+                return ListTile(
+                  title: Text(assignment['name']),
+                  subtitle: Text('Grade: ${assignment['grade']}'),
+                  trailing: Text('Weight: ${(assignment['weight'] * 100).toStringAsFixed(0)}%'),
+                );
+              }).toList(),
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Close'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
       },
     );
   }

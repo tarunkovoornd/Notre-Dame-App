@@ -1,30 +1,174 @@
 {
-    "Fall Semester": {
-      "1st marking period": [
-        {"name": "English Literature", "grade": 92},
-        {"name": "Algebra II", "grade": 88},
-        {"name": "Biology", "grade": 95},
-        {"name": "World History", "grade": 91}
-      ],
-      "2nd marking period": [
-        {"name": "English Literature", "grade": 94},
-        {"name": "Algebra II", "grade": 90},
-        {"name": "Biology", "grade": 93},
-        {"name": "World History", "grade": 89}
-      ]
-    },
-    "Spring Semester": {
-      "1st marking period": [
-        {"name": "American Literature", "grade": 90},
-        {"name": "Pre-Calculus", "grade": 87},
-        {"name": "Chemistry", "grade": 92},
-        {"name": "Economics", "grade": 94}
-      ],
-      "2nd marking period": [
-        {"name": "American Literature", "grade": 93},
-        {"name": "Pre-Calculus", "grade": 89},
-        {"name": "Chemistry", "grade": 91},
-        {"name": "Economics", "grade": 96}
-      ]
-    }
+  "Fall Semester": {
+    "1st marking period": [
+      {
+        "name": "English Literature",
+        "grade": 92,
+        "assignments": [
+          {"name": "Essay on Shakespeare", "grade": 90, "weight": 0.3},
+          {"name": "Poetry Analysis", "grade": 95, "weight": 0.3},
+          {"name": "Class Participation", "grade": 92, "weight": 0.2},
+          {"name": "Midterm Exam", "grade": 91, "weight": 0.2}
+        ]
+      },
+      {
+        "name": "Algebra II",
+        "grade": 88,
+        "assignments": [
+          {"name": "Quadratic Equations Quiz", "grade": 85, "weight": 0.2},
+          {"name": "Polynomial Functions Project", "grade": 92, "weight": 0.3},
+          {"name": "Homework Assignments", "grade": 88, "weight": 0.2},
+          {"name": "Midterm Exam", "grade": 87, "weight": 0.3}
+        ]
+      },
+      {
+        "name": "Biology",
+        "grade": 95,
+        "assignments": [
+          {"name": "Cell Structure Lab Report", "grade": 98, "weight": 0.25},
+          {"name": "Genetics Quiz", "grade": 93, "weight": 0.2},
+          {"name": "Ecosystem Project", "grade": 96, "weight": 0.3},
+          {"name": "Midterm Exam", "grade": 94, "weight": 0.25}
+        ]
+      },
+      {
+        "name": "World History",
+        "grade": 91,
+        "assignments": [
+          {"name": "Ancient Civilizations Essay", "grade": 89, "weight": 0.3},
+          {"name": "Medieval Europe Presentation", "grade": 94, "weight": 0.25},
+          {"name": "Historical Figure Biography", "grade": 92, "weight": 0.25},
+          {"name": "Midterm Exam", "grade": 90, "weight": 0.2}
+        ]
+      }
+    ],
+    "2nd marking period": [
+      {
+        "name": "English Literature",
+        "grade": 94,
+        "assignments": [
+          {"name": "Novel Analysis Essay", "grade": 96, "weight": 0.3},
+          {"name": "Literary Devices Quiz", "grade": 92, "weight": 0.2},
+          {"name": "Oral Presentation", "grade": 95, "weight": 0.3},
+          {"name": "Final Exam", "grade": 93, "weight": 0.2}
+        ]
+      },
+      {
+        "name": "Algebra II",
+        "grade": 90,
+        "assignments": [
+          {"name": "Logarithms Quiz", "grade": 88, "weight": 0.2},
+          {"name": "Trigonometry Project", "grade": 93, "weight": 0.3},
+          {"name": "Problem Set Assignments", "grade": 90, "weight": 0.2},
+          {"name": "Final Exam", "grade": 89, "weight": 0.3}
+        ]
+      },
+      {
+        "name": "Biology",
+        "grade": 93,
+        "assignments": [
+          {"name": "Evolution Essay", "grade": 95, "weight": 0.25},
+          {"name": "Human Anatomy Quiz", "grade": 91, "weight": 0.2},
+          {"name": "Biodiversity Project", "grade": 94, "weight": 0.3},
+          {"name": "Final Exam", "grade": 92, "weight": 0.25}
+        ]
+      },
+      {
+        "name": "World History",
+        "grade": 89,
+        "assignments": [
+          {"name": "Industrial Revolution Essay", "grade": 87, "weight": 0.3},
+          {"name": "World War I Presentation", "grade": 92, "weight": 0.25},
+          {"name": "Cold War Analysis", "grade": 90, "weight": 0.25},
+          {"name": "Final Exam", "grade": 88, "weight": 0.2}
+        ]
+      }
+    ]
+  },
+  "Spring Semester": {
+    "1st marking period": [
+      {
+        "name": "American Literature",
+        "grade": 90,
+        "assignments": [
+          {"name": "Modernist Literature Essay", "grade": 88, "weight": 0.3},
+          {"name": "Poetry Recitation", "grade": 93, "weight": 0.2},
+          {"name": "Short Story Analysis", "grade": 91, "weight": 0.3},
+          {"name": "Midterm Exam", "grade": 89, "weight": 0.2}
+        ]
+      },
+      {
+        "name": "Pre-Calculus",
+        "grade": 87,
+        "assignments": [
+          {"name": "Limits Quiz", "grade": 85, "weight": 0.2},
+          {"name": "Derivatives Project", "grade": 90, "weight": 0.3},
+          {"name": "Problem Set Assignments", "grade": 87, "weight": 0.2},
+          {"name": "Midterm Exam", "grade": 86, "weight": 0.3}
+        ]
+      },
+      {
+        "name": "Chemistry",
+        "grade": 92,
+        "assignments": [
+          {"name": "Periodic Table Quiz", "grade": 94, "weight": 0.2},
+          {"name": "Chemical Reactions Lab Report", "grade": 91, "weight": 0.3},
+          {"name": "Molecular Structure Project", "grade": 93, "weight": 0.25},
+          {"name": "Midterm Exam", "grade": 90, "weight": 0.25}
+        ]
+      },
+      {
+        "name": "Economics",
+        "grade": 94,
+        "assignments": [
+          {"name": "Supply and Demand Analysis", "grade": 96, "weight": 0.3},
+          {"name": "Market Structures Quiz", "grade": 92, "weight": 0.2},
+          {"name": "Economic Policy Presentation", "grade": 95, "weight": 0.3},
+          {"name": "Midterm Exam", "grade": 93, "weight": 0.2}
+        ]
+      }
+    ],
+    "2nd marking period": [
+      {
+        "name": "American Literature",
+        "grade": 93,
+        "assignments": [
+          {"name": "Contemporary Literature Essay", "grade": 95, "weight": 0.3},
+          {"name": "Author Study Presentation", "grade": 91, "weight": 0.25},
+          {"name": "Literary Criticism Assignment", "grade": 94, "weight": 0.25},
+          {"name": "Final Exam", "grade": 92, "weight": 0.2}
+        ]
+      },
+      {
+        "name": "Pre-Calculus",
+        "grade": 89,
+        "assignments": [
+          {"name": "Integrals Quiz", "grade": 87, "weight": 0.2},
+          {"name": "Optimization Problems Project", "grade": 92, "weight": 0.3},
+          {"name": "Trigonometric Functions Assignment", "grade": 89, "weight": 0.2},
+          {"name": "Final Exam", "grade": 88, "weight": 0.3}
+        ]
+      },
+      {
+        "name": "Chemistry",
+        "grade": 91,
+        "assignments": [
+          {"name": "Acid-Base Reactions Lab", "grade": 93, "weight": 0.25},
+          {"name": "Thermodynamics Quiz", "grade": 89, "weight": 0.2},
+          {"name": "Organic Chemistry Project", "grade": 92, "weight": 0.3},
+          {"name": "Final Exam", "grade": 90, "weight": 0.25}
+        ]
+      },
+      {
+        "name": "Economics",
+        "grade": 96,
+        "assignments": [
+          {"name": "Macroeconomics Essay", "grade": 98, "weight": 0.3},
+          {"name": "International Trade Quiz", "grade": 94, "weight": 0.2},
+          {"name": "Economic Indicators Analysis", "grade": 97, "weight": 0.3},
+          {"name": "Final Exam", "grade": 95, "weight": 0.2}
+        ]
+      }
+    ]
   }
+}
